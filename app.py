@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -33,6 +33,18 @@ def profile3():
 @app.route('/done')
 def done():
     return render_template("done.html")
+
+@app.route('/confirmation')
+def confirmation():
+    name = request.args.get("name")
+    email= request.args.get("email")
+    print(name)
+    print(email)
+    props = {
+        "name": name,
+        "email": email
+    }
+    return render_template("confirmation.html", data=props)
 
 if __name__ == '__main__':
     app.run(debug=True, port=3000)
